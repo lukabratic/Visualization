@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 df = pd.read_csv('../Datasets/CoronavirusTotal.csv')
 
 # Removing empty spaces from State column to avoid errors
-filtered_df = filtered_df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+filtered_df = df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
 
 # Creating unrecovered column
 df['Unrecovered'] = df['Confirmed'] - df['Deaths'] - df['Recovered']
