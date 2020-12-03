@@ -18,15 +18,17 @@ app.layout = html.Div(children=[
                 'color': '#ef3e18'
             }
             ),
-    html.Div('Web dashboard for Data Visualization using Python', style={'textAlign': 'center'}),
-    html.Div('Coronavirus COVID-19 Global Cases -  1/22/2020 to 3/17/2020', style={'textAlign': 'center'}),
+    html.Div('Web dashboard for Data Visualization using Python',
+             style={'textAlign': 'center'}),
+    html.Div('Coronavirus COVID-19 Global Cases - 1/22/2020 tp 3/17/2020',
+             style={'textAlign': 'center'}),
     html.Br(),
     html.Br(),
     html.Hr(style={'color': '#7FDBFF'}),
     html.H3('Interactive Bar chart', style={'color': '#df1e56'}),
     html.Div('This bar chart represent the number of confirmed cases in the first 20 countries of selected continent.'),
     dcc.Graph(id='graph1'),
-    html.Div('Please select a continent', style={'color': '#ef3e18', 'margin':'10px'}),
+    html.Div('Please select a continent', style={'color': '#ef3e18', 'margin': '10px'}),
     dcc.Dropdown(
         id='select-continent',
         options=[
@@ -51,9 +53,10 @@ def update_figure(selected_continent):
     new_df = filtered_df.groupby(['Country'])['Confirmed'].sum().reset_index()
     new_df = new_df.sort_values(by=['Confirmed'], ascending=[False]).head(20)
     data_interactive_barchart = [go.Bar(x=new_df['Country'], y=new_df['Confirmed'])]
-    return {'data': data_interactive_barchart, 'layout': go.Layout(title='Corona Virus Confirmed Cases in '+selected_continent,
-                                                                   xaxis={'title': 'Country'},
-                                                                   yaxis={'title': 'Number of confirmed cases'})}
+    return {'data': data_interactive_barchart,
+            'layout': go.Layout(title='Corona Virus Confirmed Cases in ' + selected_continent,
+                                xaxis={'title': 'Country'},
+                                yaxis={'title': 'Number of confirmed cases'})}
 
 
 if __name__ == '__main__':
